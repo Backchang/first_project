@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <title>{% block title %}Django Web Programming{% endblock %}</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    {% block extra-style %}{% endblock %} <!-- base에서 정의한 css파일외에 하위페이지에서 필요한 Css파일을 정의할수있다.-->
+</head>
+
+<body style="padding-top:90px;"> <!-- style="padding-top:90px; 을 없애면전체화면  있으면 90정도띄기-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <span class="navbar-brand mx-5 mb-0 font-weight-bold font-italic">Django - Python WebProgramming</span>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item mx-1 btn btn-primary">
+                <a class="nav-link text-white" href="{% url 'home' %}">Home</a></li>
+            <li class="nav-item mx-1 btn btn-primary">
+                <a class="nav-link text-white" href="{% url 'bookmark:index">Bookmark</a></li>
+            <li class="nav-item mx-1 btn btn-primary">
+                <a class="nav-link text-white" href="{% url 'blog:index">Blog</a></li>
+            <li class="nav-item mx-1 btn btn-primary">
+                <a class="nav-link text-white" href="">Photo</a></li>
+                    
+            <li class="nav-item dropdown mx-1 btn btn-primary">
+                <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" >Util</a>
+                
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
+                    <a class="dropdown-item" href="">Search</a>
+                </div>
+            </li>
+        </ul>
+
+        <form class="form-inline my-2" action="" method="post">{% csrf_token %}
+            <input type="search" class="form-control mr-sm-2" placeholder="globalsearch" name="search_word">
+        </form>
+    </div>
+</nav>
+
+
+
+
+<div class="container" > 
+    {% block content %}{% endblock %}
+</div>
+
+{% block footer %}{% endblock %} <!-- 반면 footer부분은 하위에서 추가할가능성이있으니, 추가할수있도록만 해놨음 -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/0699ea1ab0.js" crossorigin="anonymous"></script> <!-- 아이콘을 사용하기위해 fontawesome을사용-->
+
+{% block extra-script %}{% endblock %}
+
+</body>
+</html>
